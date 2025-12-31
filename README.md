@@ -42,3 +42,8 @@ Tech Stack
 IDE: IntelliJ IDEA
 
 Version Control: Git & GitHub
+
+<img width="1919" height="898" alt="image" src="https://github.com/user-attachments/assets/b3ed2291-0fb6-4601-8abd-bbdeaa51ef50" />
+
+
+
