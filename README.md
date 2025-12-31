@@ -30,27 +30,6 @@ Tech Stack
   Build Tool: Maven
 
 
-
-
-todoapp
-│
-├── src/main/java/com/app/todoapp
-│   ├── Controller
-│   │   └── TaskController.java
-│   ├── Model
-│   │   └── Task.java
-│   ├── Service
-│   │   └── TaskService.java
-│   └── TodoappApplication.java
-│
-├── src/main/resources
-│   ├── templates
-│   │   └── tasks.html
-│   └── application.properties
-│
-└── pom.xml
-
-
 | Method | Endpoint       | Description            |
 | ------ | -------------- | ---------------------- |
 | GET    | `/`            | View all tasks         |
