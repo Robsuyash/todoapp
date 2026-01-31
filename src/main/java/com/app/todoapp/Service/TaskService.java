@@ -1,8 +1,10 @@
 package com.app.todoapp.service;
 
-
 import com.app.todoapp.model.Task;
 import com.app.todoapp.repository.TaskRepository;
+import com.app.todoapp.repository.UserRepository;
+import com.app.todoapp.model.User;
+
 
 import org.springframework.stereotype.Service;
 
@@ -11,22 +13,40 @@ import java.util.List;
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository,
+            UserRepository userRepository) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
     }
+
+    // public TaskService(TaskRepository taskRepository) {
+    //     this.taskRepository = taskRepository;
+    // }
 
     public List<Task> getAllTasks() {
-    return taskRepository.findAll();
+        return taskRepository.findAll();
     }
 
-    public void createTask(String title) {
-        Task task=new Task();
-        task.setTitle(title);
-        task.setCompleted(false);
-        taskRepository.save(task);
-        return;
-    }
+    // public void createTask(String title) {
+    //     Task task = new Task();
+    //     task.setTitle(title);
+    //     task.setCompleted(false);
+    //     taskRepository.save(task);
+    //     return;
+    // }
+    public void createTask(String title, String email) {
+    User user = userRepository.findByEmail(email)
+        .orElseThrow(() -> new RuntimeException("User not found"));
+
+    Task task = new Task();
+    task.setTitle(title);
+    task.setCompleted(false);
+    task.setUser(user);
+
+    taskRepository.save(task);
+}
 
     public void deleteTask(Long id) {
         taskRepository.deleteById(id);
@@ -34,9 +54,14 @@ public class TaskService {
     }
 
     public void toggleTask(Long id) {
-        Task task=taskRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid task id"));
+        Task task = taskRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid task id"));
         task.setCompleted(!task.isCompleted());
         taskRepository.save(task);
         return;
     }
+
+    public List<Task> getTasksForUser(String email) {
+        return taskRepository.findByUserEmail(email);
+    }
+
 }

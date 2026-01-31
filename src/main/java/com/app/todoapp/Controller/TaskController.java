@@ -1,45 +1,40 @@
 package com.app.todoapp.controller;
 
-
-
 import com.app.todoapp.model.Task;
 import com.app.todoapp.service.TaskService;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
 
 import java.util.List;
 
-@Controller
-@CrossOrigin
+@RestController
+@RequestMapping("/todos")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class TaskController {
 
-    private final TaskService taskservice;
+    private final TaskService taskService;
 
-    public TaskController(TaskService taskservice) {
-        this.taskservice = taskservice;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
-    @GetMapping("/")
-    public String getTask(Model model){
-        List<Task> tasks = taskservice.getAllTasks();
-        model.addAttribute("tasks",tasks);
-        return "tasks";
+
+    @GetMapping
+    public List<Task> getTodos(@RequestParam String email) {
+        return taskService.getTasksForUser(email);
     }
-   
+
     @PostMapping
-    public String createTask(@RequestParam String title){
-       taskservice.createTask(title);
-        return "redirect:/";
+    public void addTodo(@RequestParam String email,
+                        @RequestBody Task task) {
+        taskService.createTask(task.getTitle(), email);
     }
-    @GetMapping("/{id}/delete")
-    public String deleteTask(@PathVariable Long id){
-        taskservice.deleteTask(id);
-        return "redirect:/";
-    }
+
     @GetMapping("/{id}/toggle")
-    public String toggleTask(@PathVariable Long id){
-        taskservice.toggleTask(id);
-        return "redirect:/";
+    public void toggle(@PathVariable Long id) {
+        taskService.toggleTask(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        taskService.deleteTask(id);
     }
 }
