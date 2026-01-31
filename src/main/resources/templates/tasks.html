@@ -1,10 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
+{% comment %} <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            width: 420px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f7f7f7;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .task span {
+            flex: 1;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .actions a {
+            margin-left: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #667eea;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+
+        .empty {
+            text-align: center;
+            color: gray;
+            margin-top: 10px;
+        }
+    </style>
 </head>
+
 <body>
-$END$
+<div class="container">
+    <h1>Todo App</h1>
+
+    <!-- ADD TASK -->
+    <form th:action="@{/}" method="post">
+        <input type="text" name="title" placeholder="Add a new task..." required>
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- TASK LIST -->
+    <th:block th:if="${#lists.isEmpty(tasks)}">
+        <p class="empty">No tasks yet ✨</p>
+    </th:block>
+
+    <th:block th:each="task : ${tasks}">
+        <div class="task">
+            <span th:text="${task.title}"
+                  th:classappend="${task.completed} ? 'completed' : ''">
+                Task Title
+            </span>
+
+            <div class="actions">
+                <a th:href="@{/{id}/toggle(id=${task.id})}">
+                    [[${task.completed} ? 'Undo' : 'Done']]
+                </a>
+                <a th:href="@{/{id}/delete(id=${task.id})}">
+                    Delete
+                </a>
+            </div>
+        </div>
+    </th:block>
+</div>
 </body>
-</html>
+</html> {% endcomment %}
