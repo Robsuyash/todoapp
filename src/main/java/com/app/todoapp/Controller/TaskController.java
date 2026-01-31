@@ -2,6 +2,7 @@ package com.app.todoapp.controller;
 
 import com.app.todoapp.model.Task;
 import com.app.todoapp.service.TaskService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,14 +18,25 @@ public class TaskController {
         this.taskService = taskService;
     }
 
+    // ✅ Get todos for logged-in user
     @GetMapping
-    public List<Task> getTodos(@RequestParam String email) {
+    public List<Task> getTodos() {
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
         return taskService.getTasksForUser(email);
     }
 
+    // ✅ Add todo for logged-in user
     @PostMapping
-    public void addTodo(@RequestParam String email,
-                        @RequestBody Task task) {
+    public void addTodo(@RequestBody Task task) {
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
         taskService.createTask(task.getTitle(), email);
     }
 

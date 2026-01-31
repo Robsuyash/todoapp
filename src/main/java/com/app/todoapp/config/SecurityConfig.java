@@ -17,28 +17,24 @@ public class SecurityConfig {
         this.jwtAuthFilter = jwtAuthFilter;
     }
 
- @Bean
- public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    //  http
-    //          .cors(cors -> {})
-    //          .csrf(csrf -> csrf.disable())
-    //          .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-    //          .authorizeHttpRequests(auth -> auth
-    //                  .requestMatchers("/auth/**").permitAll()
-    //                  .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-    //                  .anyRequest().authenticated())
-    //          .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-    //  return http.build();
-      http
+    http
         .csrf(csrf -> csrf.disable())
+        .sessionManagement(session ->
+            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        )
         .authorizeHttpRequests(auth -> auth
-            .anyRequest().permitAll()
-        );
+            .requestMatchers("/auth/**").permitAll()
+            .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+            .anyRequest().authenticated()
+        )
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
- }
+}
+
 // @Bean
 // public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
 //     org.springframework.web.cors.CorsConfiguration config =

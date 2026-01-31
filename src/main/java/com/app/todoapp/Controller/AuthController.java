@@ -5,6 +5,8 @@ import com.app.todoapp.dto.LoginRequest;
 import com.app.todoapp.dto.RegisterRequest;
 import com.app.todoapp.service.AuthService;
 
+import java.util.*;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,9 +39,10 @@ public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
 }
 
 @PostMapping("/login")
-public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-    authService.login(request);
-    return ResponseEntity.ok("login success");
+public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    String token = authService.login(request);
+    return ResponseEntity.ok(Map.of("token", token));
 }
+
 
 }
