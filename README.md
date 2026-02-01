@@ -1,49 +1,63 @@
-Todo Application (Spring Boot)
+Todo Application
 
-  A simple Todo Application built using Spring Boot, Thymeleaf, and MySQL.
-  This project helps users create, view, mark, and delete daily tasks through a clean web interface.
+A full-stack Todo application built using **Spring Boot** and **JavaScript**. This project demonstrates real-world backend concepts including authentication, authorization, security filters, and frontend–backend integration.
 
-Features
+The application evolved from a basic CRUD system into a secure, JWT-authenticated platform with user-specific data isolation.
 
-  1. Add new tasks
+---
 
-  2. View all tasks
+## Features
 
-  3. Mark tasks as completed / undo
+- **User Authentication:** Registration and login functionality.
+- **Secure Storage:** Passwords hashed using BCrypt.
+- **Stateless Auth:** JWT-based stateless authentication mechanism.
+- **Data Isolation:** Users can only access and manage their own specific todos.
+- **Task Management:** Create, view, toggle, and delete tasks.
+- **Logout:** Secure logout support.
 
-  4. Delete tasks
+---
 
-  5. Persistent storage using MySQL
+## Tech Stack
 
-  6. Clean UI using Thymeleaf + CSS
+### Backend
+- **Language:** Java 21
+- **Framework:** Spring Boot 4.x
+- **Security:** Spring Security, BCrypt, JWT (JJWT)
+- **Database:** MySQL, Hibernate, Spring Data JPA
 
-Tech Stack
+### Frontend
+- **Core:** HTML, CSS, Vanilla JavaScript
+- **Server:** Live Server (for local development)
 
-  Backend: Spring Boot (Java)
+---
 
-  Frontend: Thymeleaf, HTML, CSS
+##  Authentication Flow
 
-  Database: MySQL
+1.  **Registration:** User registers; password is hashed and stored in MySQL.
+2.  **Login:** User logs in; a **JWT token** is generated.
+3.  **Storage:** The token is stored in the browser (localStorage/sessionStorage).
+4.  **Request:** The token is sent via the Authorization header with every protected request.
+5.  **Validation:** Backend validates the token, extracts identity, and allows access.
 
-  ORM: Spring Data JPA (Hibernate)
+---
 
-  Build Tool: Maven
+##  Security Highlights
 
+* **Stateless Authentication:** No server-side session storage.
+* **Password Hashing:** Industry-standard BCrypt implementation.
+* **Custom Filters:** specific JWT filters to intercept and validate requests.
 
-| Method | Endpoint       | Description            |
-| ------ | -------------- | ---------------------- |
-| GET    | `/`            | View all tasks         |
-| POST   | `/`            | Create a new task      |
-| GET    | `/{id}/toggle` | Toggle task completion |
-| GET    | `/{id}/delete` | Delete a task          |
+---
 
+##  Project Structure
 
-
-IDE: IntelliJ IDEA
-
-Version Control: Git & GitHub
-
-<img width="1919" height="898" alt="image" src="https://github.com/user-attachments/assets/b3ed2291-0fb6-4601-8abd-bbdeaa51ef50" />
-
-
-
+```text
+src/main/java/com/yourpackage
+├── controller      # REST Controllers
+├── service         # Business Logic
+├── repository      # Database Access (JPA)
+├── model           # Entity Classes
+├── security        # JWT & Security Config
+└── dto             # Data Transfer Objects
+<img width="1919" height="891" alt="Screenshot 2026-01-31 162647" src="https://github.com/user-attachments/assets/5f328e78-2094-445e-b9f4-9861d1380b7f" />
+<img width="1919" height="898" alt="Screenshot 2026-01-31 162712" src="https://github.com/user-attachments/assets/aeb879aa-8c54-46b7-a29f-fd71377cbe4d" />
