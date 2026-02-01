@@ -6,6 +6,11 @@ The application evolved from a basic CRUD system into a secure, JWT-authenticate
 
 ---
 
+<img width="1919" height="891" alt="Screenshot 2026-01-31 162647" src="https://github.com/user-attachments/assets/5f328e78-2094-445e-b9f4-9861d1380b7f" />
+<img width="1919" height="898" alt="Screenshot 2026-01-31 162712" src="https://github.com/user-attachments/assets/aeb879aa-8c54-46b7-a29f-fd71377cbe4d" />
+
+---
+
 ## Features
 
 - **User Authentication:** Registration and login functionality.
@@ -59,5 +64,7 @@ src/main/java/com/yourpackage
 ├── model           # Entity Classes
 ├── security        # JWT & Security Config
 └── dto             # Data Transfer Objects
-<img width="1919" height="891" alt="Screenshot 2026-01-31 162647" src="https://github.com/user-attachments/assets/5f328e78-2094-445e-b9f4-9861d1380b7f" />
-<img width="1919" height="898" alt="Screenshot 2026-01-31 162712" src="https://github.com/user-attachments/assets/aeb879aa-8c54-46b7-a29f-fd71377cbe4d" />
+---
+
+
+
