@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks | Todo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            background: var(--bg);
+            color: #1e293b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Top Bar */
+        .header {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo { font-weight: 600; font-size: 20px; color: var(--accent); }
+        
+        .logout-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        /* Main Container */
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+        }
+
+        .input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        input#newTodo {
+            flex: 1;
+            padding: 16px;
+            border: 2px solid #f1f5f9;
+            border-radius: 16px;
+            background: #f8fafc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input#newTodo:focus { border-color: var(--accent); background: white; }
+
+        .add-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            width: 54px;
+            border-radius: 16px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Task Items */
+        .task {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #f1f5f9;
+            transition: 0.2s;
+        }
+
+        .task:hover {
+            transform: scale(1.01);
+            border-color: #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .task-title {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .done {
+            text-decoration: line-through;
+            opacity: 0.4;
+        }
+
+        .btn-group { display: flex; gap: 8px; }
+
+        .icon-btn {
+            border: none;
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-check:hover { background: #dcfce7; color: #10b981; }
+        .btn-del:hover { background: #fee2e2; color: #ef4444; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 0;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">Todo</div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<div class="container">
+    <div class="input-area">
+        <input id="newTodo" placeholder="What's on your mind?">
+        <button class="add-btn" onclick="addTodo()">+</button>
+    </div>
+
+    <div id="todoList">
+        </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
